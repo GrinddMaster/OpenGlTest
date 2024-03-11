@@ -104,13 +104,20 @@ glVertex2i(25,50);
 glEnd();
 
 //Trees ----------------------------------------------------------------
-DrawCircle(-590,110,60,1000);
+
 glBegin(GL_QUADS);
 glColor3f(1, 1, 1);
 glVertex2i(-600,-200);
 glVertex2i(-600,100);
 glVertex2i(-450,100);
 glVertex2i(-450,-200);
+glEnd();
+
+glColor3f(1, 0, 1);
+DrawCircle(-590,110,60,1000);
+DrawCircle(-550,150,60,1000);
+DrawCircle(-490,110,60,1000);
+
 
 glBegin(GL_QUADS);
 glColor3f(1, 1, 1);
@@ -118,8 +125,12 @@ glVertex2i(600,-200);
 glVertex2i(600,100);
 glVertex2i(450,100);
 glVertex2i(450,-200);
-
 glEnd();
+
+glColor3f(1, 0, 1);
+DrawCircle(590,110,60,1000);
+DrawCircle(550,150,60,1000);
+DrawCircle(490,110,60,1000);
 
 
 
