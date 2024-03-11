@@ -25,6 +25,104 @@ glVertex2f(x + cx, y + cy);//output vertex
 }
 glEnd();
 }
+void RoadAndMoon()
+{
+glColor3f(1.0, 1.0, 0);
+DrawCircle(550,330,60,1000);
+glColor3f(1.0, 1.0, 1.0);
+DrawCircle(500,330,60,1000);
+
+glBegin(GL_QUADS);
+glColor3f(0, 0, 0);
+glVertex2i(400,-400);
+glVertex2i(-400,-400);
+glVertex2i(-100,50);
+glVertex2i(100,50);
+glEnd();
+}
+
+void RoadSides()
+{
+glBegin(GL_POLYGON);
+glColor3f(1, 1, 0);
+glVertex2i(-800,-400);
+glVertex2i(-350,-400);
+glVertex2i(-100,50);
+glVertex2i(-800,50);
+glEnd();
+
+glBegin(GL_POLYGON);
+glColor3f(1, 1, 0);
+glVertex2i(800,-400);
+glVertex2i(350,-400);
+glVertex2i(100,50);
+glVertex2i(800,50);
+glEnd();	
+}
+
+void RoadStripes()
+{
+glBegin(GL_QUADS);
+glColor3f(1, 1, 1);
+glVertex2i(25,-400);
+glVertex2i(-25,-400);
+glVertex2i(-25,-250);
+glVertex2i(25,-250);
+glEnd();
+
+
+glBegin(GL_QUADS);
+glColor3f(1, 1, 1);
+glVertex2i(25,-100);
+glVertex2i(-25,-100);
+glVertex2i(-25,50);
+glVertex2i(25,50);
+glEnd();
+}
+
+void Trees()
+{
+	glBegin(GL_QUADS);
+glColor3f(1, 1, 1);
+glVertex2i(-600,-200);
+glVertex2i(-600,100);
+glVertex2i(-450,100);
+glVertex2i(-450,-200);
+glEnd();
+
+glColor3f(1, 0, 1);
+DrawCircle(-590,110,60,1000);
+DrawCircle(-550,150,60,1000);
+DrawCircle(-490,110,60,1000);
+
+
+glBegin(GL_QUADS);
+glColor3f(1, 1, 1);
+glVertex2i(600,-200);
+glVertex2i(600,100);
+glVertex2i(450,100);
+glVertex2i(450,-200);
+glEnd();
+
+glColor3f(1, 0, 1);
+DrawCircle(590,110,60,1000);
+DrawCircle(550,150,60,1000);
+DrawCircle(490,110,60,1000);
+}
+
+void Stars()
+{
+glColor3f(1, 1, 1);
+DrawCircle(290,100,7,1000);
+DrawCircle(350,290,7,1000);
+DrawCircle(-190,260,7,1000);
+DrawCircle(187,243,7,1000);
+DrawCircle(-250,255,7,1000);
+DrawCircle(-290,117,7,1000);
+DrawCircle(-275,210,7,1000);
+DrawCircle(-150,159,7,1000);
+DrawCircle(-180,110,7,1000);
+}
 
 void printSome(char *str,int x,int y) {
 	
@@ -54,85 +152,15 @@ void init2D (void)
 } 
 
 void Display (void) 
-{ glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(1.0, 1.0, 0);
-DrawCircle(550,330,60,1000);
-glColor3f(1.0, 1.0, 1.0);
-DrawCircle(500,330,60,1000);
+{ 
+glClear(GL_COLOR_BUFFER_BIT);
 
 
-
-glBegin(GL_QUADS);
-glColor3f(0, 0, 0);
-glVertex2i(400,-400);
-glVertex2i(-400,-400);
-glVertex2i(-100,50);
-glVertex2i(100,50);
-glEnd();
-//------------------- Sides of the road ---------------------------
-glBegin(GL_POLYGON);
-glColor3f(1, 1, 0);
-glVertex2i(-800,-400);
-glVertex2i(-350,-400);
-glVertex2i(-100,50);
-glVertex2i(-800,50);
-glEnd();
-
-glBegin(GL_POLYGON);
-glColor3f(1, 1, 0);
-glVertex2i(800,-400);
-glVertex2i(350,-400);
-glVertex2i(100,50);
-glVertex2i(800,50);
-glEnd();
-//-------------------------------------------- Road Stripes
-glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
-glVertex2i(25,-400);
-glVertex2i(-25,-400);
-glVertex2i(-25,-250);
-glVertex2i(25,-250);
-glEnd();
-
-
-glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
-glVertex2i(25,-100);
-glVertex2i(-25,-100);
-glVertex2i(-25,50);
-glVertex2i(25,50);
-glEnd();
-
-//Trees ----------------------------------------------------------------
-
-glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
-glVertex2i(-600,-200);
-glVertex2i(-600,100);
-glVertex2i(-450,100);
-glVertex2i(-450,-200);
-glEnd();
-
-glColor3f(1, 0, 1);
-DrawCircle(-590,110,60,1000);
-DrawCircle(-550,150,60,1000);
-DrawCircle(-490,110,60,1000);
-
-
-glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
-glVertex2i(600,-200);
-glVertex2i(600,100);
-glVertex2i(450,100);
-glVertex2i(450,-200);
-glEnd();
-
-glColor3f(1, 0, 1);
-DrawCircle(590,110,60,1000);
-DrawCircle(550,150,60,1000);
-DrawCircle(490,110,60,1000);
-
-
+RoadAndMoon();
+RoadSides();
+RoadStripes();
+Trees();
+Stars();
 
 glutSwapBuffers();
 glFlush();
