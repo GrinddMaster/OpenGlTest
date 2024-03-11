@@ -25,12 +25,21 @@ glVertex2f(x + cx, y + cy);//output vertex
 }
 glEnd();
 }
+
+void printSome(char *str,int x,int y) {
+	
+glColor3f (1, 1.0, 1.0);
+glRasterPos2d(x,y);
+for (int i=0;i<strlen(str);i++){glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,str[i]);}
+glFlush();
+}
+
 void RoadAndMoon()
 {
-glColor3f(1.0, 1.0, 0);
-DrawCircle(550,330,60,1000);
 glColor3f(1.0, 1.0, 1.0);
-DrawCircle(500,330,60,1000);
+DrawCircle(550,330,60,1000);
+glColor3f(0.0, 0.0, 0.5);
+DrawCircle(520,330,60,1000);
 
 glBegin(GL_QUADS);
 glColor3f(0, 0, 0);
@@ -41,10 +50,33 @@ glVertex2i(100,50);
 glEnd();
 }
 
+void WelcomeSign()
+{
+glBegin(GL_LINE_STRIP);
+glColor3f(1, 1, 1);
+glVertex2i(490,-25);
+glVertex2i(525,45);
+glVertex2i(550,-25);
+glEnd();
+
+glBegin(GL_QUADS);
+glColor3f(1, 1, 1);
+
+glVertex2i(600,0);
+glVertex2i(600,-50);
+glVertex2i(450,-50);
+glVertex2i(450,0);
+
+glColor3f(0.5f, 0.35f, 0.05f);
+printSome("Welcome",325,125);
+
+glEnd();
+}
+
 void RoadSides()
 {
 glBegin(GL_POLYGON);
-glColor3f(1, 1, 0);
+glColor3f(0, 0.5, 0);
 glVertex2i(-800,-400);
 glVertex2i(-350,-400);
 glVertex2i(-100,50);
@@ -52,7 +84,7 @@ glVertex2i(-800,50);
 glEnd();
 
 glBegin(GL_POLYGON);
-glColor3f(1, 1, 0);
+glColor3f(0, 0.5, 0);
 glVertex2i(800,-400);
 glVertex2i(350,-400);
 glVertex2i(100,50);
@@ -83,28 +115,29 @@ glEnd();
 void Trees()
 {
 	glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
+glColor3f(0.5f, 0.35f, 0.05f);
 glVertex2i(-600,-200);
 glVertex2i(-600,100);
 glVertex2i(-450,100);
 glVertex2i(-450,-200);
 glEnd();
 
-glColor3f(1, 0, 1);
+glColor3f(0, 1, 0);
 DrawCircle(-590,110,60,1000);
 DrawCircle(-550,150,60,1000);
 DrawCircle(-490,110,60,1000);
 
-
 glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
+glColor3f(0.5f, 0.35f, 0.05f);
 glVertex2i(600,-200);
 glVertex2i(600,100);
 glVertex2i(450,100);
 glVertex2i(450,-200);
 glEnd();
 
-glColor3f(1, 0, 1);
+WelcomeSign();
+
+glColor3f(0, 1, 0);
 DrawCircle(590,110,60,1000);
 DrawCircle(550,150,60,1000);
 DrawCircle(490,110,60,1000);
@@ -122,25 +155,22 @@ DrawCircle(-290,117,7,1000);
 DrawCircle(-275,210,7,1000);
 DrawCircle(-150,159,7,1000);
 DrawCircle(-180,110,7,1000);
+DrawCircle(-375,410,7,1000);
+DrawCircle(-350,359,7,1000);
+DrawCircle(-480,410,7,1000);
 }
 
-void printSome(char *str,int x,int y) {
-	
-glColor3f (1, 1.0, 1.0);
-glRasterPos2d(x,y);
-for (int i=0;i<strlen(str);i++){glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,str[i]);}
-glFlush();
-}
+
 
 
 void init2D (void) 
 { 
 	// making background color black as first 
 	// 3 arguments all are 0.0 
-	glClearColor(0, 173, 150, 0.4); 
+	glClearColor(0, 0, 0.5, 0.5); 
 	
 	// making picture color green (in RGB mode), as middle argument is 1.0 
-	glColor3f(0.0, 1.0, 0.0); 
+	glColor3f(0.0, 0.0, 0.5); 
 	
 	// breadth of picture boundary is 1 pixel 
 	glPointSize(2.0); 
@@ -155,7 +185,6 @@ void Display (void)
 { 
 glClear(GL_COLOR_BUFFER_BIT);
 
-
 RoadAndMoon();
 RoadSides();
 RoadStripes();
@@ -167,7 +196,7 @@ glFlush();
 
 
 } 
-//g++ *filename.cpp* -o *FolderName* -lglut -lGLU -lGL
+//g++ test2.cpp -o test2 -lglut -lGLU -lGL
 
 
 int main (int argc, char** argv) 
