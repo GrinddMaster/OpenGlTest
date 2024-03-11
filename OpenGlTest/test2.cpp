@@ -30,7 +30,7 @@ void RoadAndMoon()
 glColor3f(1.0, 1.0, 0);
 DrawCircle(550,330,60,1000);
 glColor3f(1.0, 1.0, 1.0);
-DrawCircle(500,330,60,1000);
+DrawCircle(520,330,60,1000);
 
 glBegin(GL_QUADS);
 glColor3f(0, 0, 0);
@@ -38,6 +38,16 @@ glVertex2i(400,-400);
 glVertex2i(-400,-400);
 glVertex2i(-100,50);
 glVertex2i(100,50);
+glEnd();
+}
+
+void WelcomeSign()
+{
+glBegin(GL_LINE_STRIP);
+glColor3f(1, 1, 1);
+glVertex2i(490,-25);
+glVertex2i(525,45);
+glVertex2i(550,-25);
 glEnd();
 }
 
@@ -83,7 +93,7 @@ glEnd();
 void Trees()
 {
 	glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
+glColor3f(0.5f, 0.35f, 0.05f);
 glVertex2i(-600,-200);
 glVertex2i(-600,100);
 glVertex2i(-450,100);
@@ -95,14 +105,15 @@ DrawCircle(-590,110,60,1000);
 DrawCircle(-550,150,60,1000);
 DrawCircle(-490,110,60,1000);
 
-
 glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
+glColor3f(0.5f, 0.35f, 0.05f);
 glVertex2i(600,-200);
 glVertex2i(600,100);
 glVertex2i(450,100);
 glVertex2i(450,-200);
 glEnd();
+
+WelcomeSign();
 
 glColor3f(1, 0, 1);
 DrawCircle(590,110,60,1000);
@@ -122,6 +133,9 @@ DrawCircle(-290,117,7,1000);
 DrawCircle(-275,210,7,1000);
 DrawCircle(-150,159,7,1000);
 DrawCircle(-180,110,7,1000);
+DrawCircle(-375,410,7,1000);
+DrawCircle(-350,359,7,1000);
+DrawCircle(-480,410,7,1000);
 }
 
 void printSome(char *str,int x,int y) {
@@ -155,7 +169,6 @@ void Display (void)
 { 
 glClear(GL_COLOR_BUFFER_BIT);
 
-
 RoadAndMoon();
 RoadSides();
 RoadStripes();
@@ -167,7 +180,7 @@ glFlush();
 
 
 } 
-//g++ *filename.cpp* -o *FolderName* -lglut -lGLU -lGL
+//g++ test2.cpp -o test2 -lglut -lGLU -lGL
 
 
 int main (int argc, char** argv) 
