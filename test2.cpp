@@ -26,6 +26,18 @@ glVertex2f(x + cx, y + cy);//output vertex
 glEnd();
 }
 
+void Apples()
+{
+glColor3f(1.0, 0.0, 0.0);
+DrawCircle(-510,110,7,1000);
+DrawCircle(-550,120,7,1000);
+DrawCircle(-525,155,7,1000);
+DrawCircle(590,110,7,1000);
+DrawCircle(510,110,7,1000);
+DrawCircle(520,159,7,1000);
+
+}
+
 void printSome(char *str,int x,int y) {
 	
 glColor3f (1, 1.0, 1.0);
@@ -52,6 +64,11 @@ glEnd();
 
 void WelcomeSign()
 {
+
+	
+
+
+
 glBegin(GL_LINE_STRIP);
 glColor3f(1, 1, 1);
 glVertex2i(490,-25);
@@ -60,17 +77,14 @@ glVertex2i(550,-25);
 glEnd();
 
 glBegin(GL_QUADS);
-glColor3f(1, 1, 1);
+glColor3f(0,0, 1);
 
 glVertex2i(600,0);
 glVertex2i(600,-50);
 glVertex2i(450,-50);
 glVertex2i(450,0);
-
-glColor3f(0.5f, 0.35f, 0.05f);
-printSome("Welcome",325,125);
-
 glEnd();
+printSome("Welcome",450,-25);
 }
 
 void RoadSides()
@@ -141,6 +155,8 @@ glColor3f(0, 1, 0);
 DrawCircle(590,110,60,1000);
 DrawCircle(550,150,60,1000);
 DrawCircle(490,110,60,1000);
+
+Apples();
 }
 
 void Stars()
