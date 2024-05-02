@@ -13,8 +13,7 @@ int phyWidth= 600;
 int phyHeight= 600;
 int logWidth=300;
 int logHeight=300;
-int centerX=logWidth/2;
-int centerY=logHeight/2;
+
 
 void DrawCircle(float cx, float cy, float r, int num_segments) {
 glBegin(GL_POLYGON);
@@ -40,7 +39,6 @@ DrawCircle(520,159,7,1000);
 }
 
 void printSome(char *str,int x,int y) {
-	
 glColor3f (1, 1.0, 1.0);
 glRasterPos2d(x,y);
 for (int i=0;i<strlen(str);i++){glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,str[i]);}
@@ -51,7 +49,7 @@ void RoadAndMoon()
 {
 glColor3f(1.0, 1.0, 1.0);
 DrawCircle(550,330,60,1000);
-glColor3f(0.0, 0.0, 0.5);
+glColor3f(0.0, 0.0, 1.0);
 DrawCircle(520,330,60,1000);
 
 glBegin(GL_QUADS);
@@ -65,10 +63,6 @@ glEnd();
 
 void WelcomeSign()
 {
-
-	
-
-
 
 glBegin(GL_LINE_STRIP);
 glColor3f(1, 1, 1);
@@ -91,11 +85,12 @@ printSome("Welcome",450,-25);
 void RoadSides()
 {
 glBegin(GL_POLYGON);
-glColor3f(0, 0.5, 0);
+glColor3f(0, 0.5, 1);
 glVertex2i(-800,-400);
-glVertex2i(-350,-400);
+glVertex2i(-400,-400);
 glVertex2i(-100,50);
 glVertex2i(-800,50);
+
 glEnd();
 
 glBegin(GL_POLYGON);
@@ -130,14 +125,14 @@ glEnd();
 void Trees()
 {
 	glBegin(GL_QUADS);
-glColor3f(0.5f, 0.35f, 0.05f);
+glColor3f(0, 0.35f, 0.05f);
 glVertex2i(-600,-200);
 glVertex2i(-600,100);
 glVertex2i(-450,100);
 glVertex2i(-450,-200);
 glEnd();
 
-glColor3f(0, 1, 0);
+glColor3f(0, 0, 0);
 DrawCircle(-590,110,60,1000);
 DrawCircle(-550,150,60,1000);
 DrawCircle(-490,110,60,1000);
@@ -184,7 +179,8 @@ void init2D (void)
 { 
 	// making background color black as first 
 	// 3 arguments all are 0.0 
-	glClearColor(0, 0, 0.5, 0.5); 
+	glClearColor(0, 0, 0.1, 0.5); 
+
 	
 	// making picture color green (in RGB mode), as middle argument is 1.0 
 	glColor3f(0.0, 0.0, 0.5); 
@@ -202,12 +198,75 @@ void Display (void)
 { 
 glClear(GL_COLOR_BUFFER_BIT);
 
-RoadAndMoon();
-RoadSides();
-RoadStripes();
-Trees();
-Stars();
+glBegin(GL_QUADS);
+glColor3f(1, 0.5, 1);
+glVertex2i(0,-200);
+glVertex2i(0,100);
+glVertex2i(-250,100);
+glVertex2i(-250,-200);
+glEnd();
 
+glBegin(GL_QUADS);
+glColor3f(0.5f, 0.35f, 0.05f);
+glVertex2i(0,-200);
+glVertex2i(0,100);
+glVertex2i(500,200);
+glVertex2i(500,-100);
+glEnd();
+
+
+glColor3f(0.5, 0, 0);
+DrawCircle(-125,-50,70,1000);
+
+glBegin(GL_QUADS);       //door
+glColor3f(0.0f, 0.35f, 0.1f);
+glVertex2i(-50,-200);
+glVertex2i(-50,-50);
+glVertex2i(-200,-50);
+glVertex2i(-200,-200);
+glEnd();
+
+
+
+glBegin(GL_TRIANGLES);
+glColor3f(1, 1, 0.5);
+glVertex2i(-110,200);
+glVertex2i(0,100);
+glVertex2i(-250,100);
+glEnd();
+
+glColor3f(1, 1, 1);
+DrawCircle(-125,150,20,1000);
+
+glBegin(GL_QUADS);
+glColor3f(0.0f, 0.35f, 0.1f);
+glVertex2i(0,100);
+glVertex2i(-110,200);
+glVertex2i(400,300);
+glVertex2i(500,200);
+glEnd();
+glColor3f(0, 0, 0);
+printSome("Home",-200,50);
+printSome("Sweet Home",-200,30);
+
+int flag =0;
+	for(int i = 0;i<11;i++)
+	{		int z = -300;
+	int y = 200;
+		if (flag == 0)
+		{ 
+			glColor3f(1, 0.5, 0);
+			DrawCircle(z,y,10,1000);
+			flag = 1;
+		}
+		if(flag == 1)
+		{glColor3f(1, 1, 1);
+			DrawCircle(z,y,10,1000);
+			flag = 0;
+		}
+		z += 10;
+		
+	}
 glutSwapBuffers();
 glFlush();
 
