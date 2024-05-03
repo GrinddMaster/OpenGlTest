@@ -91,8 +91,7 @@ void Eat()
 
 
 
-void printSome(char *str,int x,int y) {
-	
+void printSome(char *str,int x,int y) {	
 glColor3f (1, 1.0, 1.0);
 glRasterPos2d(x,y);
 for (int i=0;i<strlen(str);i++){glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24,str[i]);}
