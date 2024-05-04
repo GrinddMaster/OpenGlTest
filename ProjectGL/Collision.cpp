@@ -6,6 +6,7 @@
 #include<GL/glut.h> 
 #include<math.h> 
 #include<string.h>
+#include<unistd.h>
 #include<iostream>
 
 using namespace std;
@@ -19,22 +20,33 @@ int logHeight=100;
 int centerX=logWidth/2;
 int centerY=logHeight/2;
 int alphaX,alphaY,flag,countscore,scoreflag = 0;
+double counter = 0;
+double Xpos = 0.0;
 
 struct BigSquare{
     int TopRightCornerX;
-    int TopRightCornerY;
+    int TopRightCornerY,BottomRightY;
+
+    int vx2,vx3,vx4,vy1,vy2,vy3,vy4;
+   int vx1 = centerX-15/2-20;
 
     void TBigSquare()
 {
+    vx1 = centerX-15/2-20;vx2=centerX+15/2-20;vx3=centerX+15/2-20;vx4=centerX-15/2-20;
+    vy1 = centerY-15/2;vy2=centerY-15/2;vy3=centerY+15/2;vy4=centerY+15/2;
+
     glColor3f(1, 1, 1);
 glBegin(GL_POLYGON);
-glVertex2f(centerX-15/2+alphaX,centerY-15/2+alphaY);
-glVertex2f(centerX+15/2+alphaX,centerY-15/2+alphaY);
-glVertex2f(centerX+15/2+alphaX,centerY+15/2+alphaY);
-glVertex2f(centerX-15/2+alphaX,centerY+15/2+alphaY);
+glVertex2f(vx1,vy1);
+glVertex2f(vx2,vy2);//Bottom right corner
+glVertex2f(vx3,vy3);
+glVertex2f(vx4,vy4);
 glEnd();
-TopRightCornerX = centerX-15/2+alphaX;
-TopRightCornerY = centerY-15/2+alphaY;
+TopRightCornerX = centerX+15/2;
+TopRightCornerY = centerY+15/2;
+BottomRightY = centerY-15/2;
+
+
 }
    };
     struct SmallSquare{
@@ -45,41 +57,45 @@ TopRightCornerY = centerY-15/2+alphaY;
 {
     glColor3f(r, g, b);
 glBegin(GL_POLYGON);
-glVertex2f((centerX+10)-5/2,(centerY+10)-5/2);
-glVertex2f((centerX+10)+5/2,(centerY+10)-5/2);
-glVertex2f((centerX+10)+5/2,(centerY+10)+5/2);
-glVertex2f((centerX+10)-5/2,(centerY+10)+5/2);
+glVertex2f((centerX+10)-5/2+alphaX,(centerY+10)-5/2+alphaY);
+glVertex2f((centerX+10)+10/2+alphaX,(centerY+10)-5/2+alphaY);
+glVertex2f((centerX+10)+10/2+alphaX,(centerY+10)+5/2+alphaY);//Top Right corner
+glVertex2f((centerX+10)-5/2+alphaX,(centerY+10)+5/2+alphaY);//Top left corner
 glEnd();
 
 
 //The two points of the frog on the left that will collide
-TopLeftCornerX = (centerX+10)-5/2;
-TopLeftCornerY = (centerY+10)-5/2;
-TopRightCornerX = (centerX+10)+5/2;
-TopRightCornerY = (centerY+10)+5/2;
+TopLeftCornerX = (centerX+10)-5/2+alphaX;
+TopLeftCornerY = (centerY+10)+5/2+alphaY;
+TopRightCornerX = (centerX+10)+5/2+alphaX;
+TopRightCornerY = (centerY+10)+5/2+alphaY;
 }
     };
 
     BigSquare Collider;
     SmallSquare Frog;
 
-void DrawCircle(float cx, float cy, float r, int num_segments) {
-glBegin(GL_POLYGON);
-for (int i = 0; i < num_segments; i++) {
-float theta = 2.0f * 3.1415926f * float(i) / float(num_segments);//get the current angle
-float x = r * cosf(theta);//calculate the x component
-float y = r * sinf(theta);//calculate the y component
-glVertex2f(x + cx, y + cy);//output vertex
-}
-glEnd();
-}
+    void PostUpdt(int value)
+    {
+        Xpos += 0.2;
+
+        if(Xpos >= (logWidth-20))
+        {
+            Xpos = 0.0;
+        }
+
+        glutPostRedisplay();
+        glutTimerFunc(1000/60,PostUpdt,0);
+    }
+
+
 
 void Collide()
 {
-    if(Collider.TopRightCornerX >= Frog.TopLeftCornerX && Collider.TopRightCornerX <= Frog.TopLeftCornerX
-    && Collider.TopRightCornerY >= Frog.TopLeftCornerY && Collider.TopRightCornerY <= Frog.TopLeftCornerY)
+    if(Collider.TopRightCornerX >= Frog.TopLeftCornerX && Collider.TopRightCornerX <= Frog.TopRightCornerX
+    && Collider.TopRightCornerY >= Frog.TopLeftCornerY && Collider.BottomRightY <= Frog.TopLeftCornerY)
     {
-        Frog.TSmallSquare(0,0.5,0.5);
+        Frog.TSmallSquare(0,0.0,0.0);
         if(scoreflag == 0)
         {
             scoreflag = 1;
@@ -155,8 +171,17 @@ char* str = new char[s.length()+1];
 strcpy(str, s.c_str());
 
 
-Collider.TBigSquare();
+printSome(str,centerX-30,centerY+40);
+printSome("Score: ",centerX-40,centerY+40);
 
+
+counter = counter+0.5;
+
+glPushMatrix();
+glTranslated(Xpos,0,0);
+Collider.TBigSquare();
+glPopMatrix();
+Collide();
 
 glutSwapBuffers();
 glFlush();
@@ -175,6 +200,7 @@ glutInitWindowSize(phyWidth, phyHeight);
 glutCreateWindow( "Assignment4");
 init2D();
 glutDisplayFunc(Display);
+glutTimerFunc(1000/60,PostUpdt,0);
 glutKeyboardFunc(KeyMoves);
 glutMainLoop();
 } 
