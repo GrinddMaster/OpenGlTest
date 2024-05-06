@@ -27,24 +27,21 @@ struct BigSquare{
     int TopRightCornerX;
     int TopRightCornerY,BottomRightY;
 
-    int vx2,vx3,vx4,vy1,vy2,vy3,vy4;
-   int vx1 = centerX-15/2-20;
+    int vx1 = centerX-12/2-20,vx2=centerX+12/2-20,vx3=centerX+12/2-20,vx4=centerX-12/2-20; // X vertices
+    int vy1 = centerY-12/2,vy2=centerY-12/2,vy3=centerY+12/2,vy4=centerY+12/2; // Y vertices
 
     void TBigSquare()
 {
-    vx1 = centerX-15/2-20;vx2=centerX+15/2-20;vx3=centerX+15/2-20;vx4=centerX-15/2-20;
-    vy1 = centerY-15/2;vy2=centerY-15/2;vy3=centerY+15/2;vy4=centerY+15/2;
-
     glColor3f(1, 1, 1);
 glBegin(GL_POLYGON);
-glVertex2f(vx1,vy1);
+glVertex2f(vx1,vy1);//Bottom left corner
 glVertex2f(vx2,vy2);//Bottom right corner
-glVertex2f(vx3,vy3);
-glVertex2f(vx4,vy4);
+glVertex2f(vx3,vy3);//Top Right corner
+glVertex2f(vx4,vy4);//Bottom Right corner
 glEnd();
-TopRightCornerX = centerX+15/2;
-TopRightCornerY = centerY+15/2;
-BottomRightY = centerY-15/2;
+TopRightCornerX = vx2;//centerX+15/2-20
+TopRightCornerY = vy3;//centerY+15/2
+BottomRightY = vy2;//centerY-15/2
 
 
 }
@@ -57,8 +54,8 @@ BottomRightY = centerY-15/2;
 {
     glColor3f(r, g, b);
 glBegin(GL_POLYGON);
-glVertex2f((centerX+10)-5/2+alphaX,(centerY+10)-5/2+alphaY);
-glVertex2f((centerX+10)+10/2+alphaX,(centerY+10)-5/2+alphaY);
+glVertex2f((centerX+10)-5/2+alphaX,(centerY+10)-5/2+alphaY);//Bottom Left Corner
+glVertex2f((centerX+10)+10/2+alphaX,(centerY+10)-5/2+alphaY);//Bottom Right corner
 glVertex2f((centerX+10)+10/2+alphaX,(centerY+10)+5/2+alphaY);//Top Right corner
 glVertex2f((centerX+10)-5/2+alphaX,(centerY+10)+5/2+alphaY);//Top left corner
 glEnd();
@@ -77,7 +74,7 @@ TopRightCornerY = (centerY+10)+5/2+alphaY;
 
     void PostUpdt(int value)
     {
-        Xpos += 0.2;
+        Xpos += 0.19;
 
         if(Xpos >= (logWidth-20))
         {
@@ -92,7 +89,8 @@ TopRightCornerY = (centerY+10)+5/2+alphaY;
 
 void Collide()
 {
-    if(Collider.TopRightCornerX >= Frog.TopLeftCornerX && Collider.TopRightCornerX <= Frog.TopRightCornerX
+    
+    if(Collider.TopRightCornerX+Xpos >= Frog.TopLeftCornerX && Collider.TopRightCornerX+Xpos <= Frog.TopRightCornerX
     && Collider.TopRightCornerY >= Frog.TopLeftCornerY && Collider.BottomRightY <= Frog.TopLeftCornerY)
     {
         Frog.TSmallSquare(0,0.0,0.0);
@@ -129,11 +127,11 @@ void KeyMoves(unsigned char key, int x, int y) {
     }
     if(key == 'a')
     {
-        alphaX -= 5;
+        alphaX -= 5;   
     }
     if(key == 'd')
     {
-        alphaX += 5;
+        alphaX += 5;    
     }
     
     glutPostRedisplay();
