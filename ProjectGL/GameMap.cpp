@@ -82,27 +82,92 @@ glEnd();
         }
     }
    };
-    struct SmallSquare{
-    int TopLeftCornerX,TopRightCornerX;
-    int TopRightCornerY,TopLeftCornerY;
 
-    void TSmallSquare(int r,int g,int b)
+struct RoadStrips{
+
+    int vx1 = centerX-5/2,vx2=centerX+10/2,vx3=centerX+10/2,vx4=centerX-5/2; // X vertices
+    int vy1 = centerY-3.2/2,vy2=centerY-3.2/2,vy3=centerY+3.2/2,vy4=centerY+3.2/2; // Y vertices
+    void BuildRoadStrips(int r,int g,int b)
 {
     glColor3f(r, g, b);
 glBegin(GL_POLYGON);
-glVertex2f((centerX+10)-5/2,(centerY+10)-5/2);//Bottom Left Corner
-glVertex2f((centerX+10)+10/2,(centerY+10)-5/2);//Bottom Right corner
-glVertex2f((centerX+10)+10/2,(centerY+10)+5/2);//Top Right corner
-glVertex2f((centerX+10)-5/2,(centerY+10)+5/2);//Top left corner
+glVertex2f(vx1,vy1);//Bottom Left Corner
+glVertex2f(vx2,vy2);//Bottom Right corner
+glVertex2f(vx3,vy3);//Top Right corner
+glVertex2f(vx4,vy4);//Top left corner
 glEnd();
-
-
-//The two points of the frog on the left that will collide
-TopLeftCornerX = (centerX+10)-5/2;
-TopLeftCornerY = (centerY+10)+5/2;
-TopRightCornerX = (centerX+10)+5/2;
-TopRightCornerY = (centerY+10)+5/2;
+glColor3f(r, g, b);
+glBegin(GL_POLYGON);
+glVertex2f(vx1+20,vy1);//Bottom Left Corner
+glVertex2f(vx2+20,vy2);//Bottom Right corner
+glVertex2f(vx3+20,vy3);//Top Right corner
+glVertex2f(vx4+20,vy4);//Top left corner
+glEnd();
+glColor3f(r, g, b);
+glBegin(GL_POLYGON);
+glVertex2f(vx1+40,vy1);//Bottom Left Corner
+glVertex2f(vx2+40,vy2);//Bottom Right corner
+glVertex2f(vx3+40,vy3);//Top Right corner
+glVertex2f(vx4+40,vy4);//Top left corner
+glEnd();
+glColor3f(r, g, b);
+glBegin(GL_POLYGON);
+glVertex2f(vx1-20,vy1);//Bottom Left Corner
+glVertex2f(vx2-20,vy2);//Bottom Right corner
+glVertex2f(vx3-20,vy3);//Top Right corner
+glVertex2f(vx4-20,vy4);//Top left corner
+glEnd();
+glColor3f(r, g, b);
+glBegin(GL_POLYGON);
+glVertex2f(vx1-40,vy1);//Bottom Left Corner
+glVertex2f(vx2-40,vy2);//Bottom Right corner
+glVertex2f(vx3-40,vy3);//Top Right corner
+glVertex2f(vx4-40,vy4);//Top left corner
+glEnd();
+glColor3f(r, g, b);
 }
+void ChangeHorizontalPos(int x1,int x2,int x3,int x4,char z)
+    {
+        if(z=='+')
+        {
+            vx1 += x1;
+            vx2 += x2;
+            vx3 += x3;
+            vx4 += x4;
+        }
+        else if (z=='-')
+        {
+            vx1 -= x1;
+            vx2 -= x2;
+            vx3 -= x3;
+            vx4 -= x4;
+        }
+        else
+        {
+            //Do Nothing
+        }  
+    }
+    void ChangeVerticalPos(int y1,int y2,int y3,int y4,char z)
+    {
+        if(z=='+')
+        {
+            vy1 += y1;
+            vy2 += y2;
+            vy3 += y3;
+            vy4 += y4;
+        }
+        else if (z=='-')
+        {
+            vy1 -= y1;
+            vy2 -= y2;
+            vy3 -= y3;
+            vy4 -= y4;
+        }
+        else
+        {
+            //Do nothing
+        }
+    }
     };
 
 
@@ -147,6 +212,7 @@ void init2D (void)
 */
 
 Road rd1,rd2,rd3;
+RoadStrips rs1,rs2,rs3;
 
 void Road1(int Width,int Height)
 {
@@ -202,6 +268,12 @@ rd2.CreateRoad(0,0,0);
 Road3(120,16);
 rd3.ChangeVerticalPos(22,22,22,22,'+');
 rd3.CreateRoad(0,0,0);
+rs1.ChangeVerticalPos(5,5,5,5,'-');
+rs1.BuildRoadStrips(1,1,1);
+rs2.ChangeVerticalPos(22,22,22,22,'+');
+rs2.BuildRoadStrips(1,1,1);
+rs3.ChangeVerticalPos(32,32,32,32,'-');
+rs3.BuildRoadStrips(1,1,1);
 
 glutSwapBuffers();
 glFlush();
