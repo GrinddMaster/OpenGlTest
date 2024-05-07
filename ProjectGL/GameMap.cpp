@@ -28,9 +28,9 @@ struct Road{
     int vx1 = centerX-W/2,vx2=centerX+W/2,vx3=centerX+W/2,vx4=centerX-W/2; // X vertices
     int vy1 = centerY-H/2,vy2=centerY-H/2,vy3=centerY+H/2,vy4=centerY+H/2; // Y vertices
 
-    void CreateRoad()
+    void CreateRoad(double r,double g,double b)
 {
-    glColor3f(1, 1, 1);
+    glColor3f(r, g, b);
 glBegin(GL_POLYGON);
 glVertex2f(vx1,vy1);//Bottom left corner
 glVertex2f(vx2,vy2);//Bottom right corner
@@ -80,7 +80,7 @@ glEnd();
         {
             //Do nothing
         }
-    }   
+    }
    };
     struct SmallSquare{
     int TopLeftCornerX,TopRightCornerX;
@@ -121,11 +121,12 @@ glFlush();
 
 
 
+
 void init2D (void) 
 { 
 	// making background color black as first 
 	// 3 arguments all are 0.0 
-	glClearColor(0, 0, 0.5, 0.5); 
+	glClearColor(0, 0.7, 0.0, 0.0); 
 	
 	// making picture color green (in RGB mode), as middle argument is 1.0 
 	glColor3f(0.0, 0.0, 0.5); 
@@ -145,23 +146,69 @@ void init2D (void)
 *
 */
 
-Road rd1;
+Road rd1,rd2,rd3;
+
+void Road1(int Width,int Height)
+{
+rd1.W = Width;
+rd1.H = Height;
+rd1.vx1 = centerX-rd1.W/2;
+rd1.vx2 = centerX+rd1.W/2;
+rd1.vx3 = centerX+rd1.W/2;
+rd1.vx4 = centerX-rd1.W/2;
+rd1.vy1 = centerY-rd1.H/2;
+rd1.vy2 = centerY-rd1.H/2;
+rd1.vy3 = centerY+rd1.H/2;
+rd1.vy4 = centerY+rd1.H/2;
+}
+
+void Road2(int Width,int Height)
+{
+rd2.W = Width;
+rd2.H = Height;
+rd2.vx1 = centerX-rd2.W/2;
+rd2.vx2 = centerX+rd2.W/2;
+rd2.vx3 = centerX+rd2.W/2;
+rd2.vx4 = centerX-rd2.W/2;
+rd2.vy1 = centerY-rd2.H/2;
+rd2.vy2 = centerY-rd2.H/2;
+rd2.vy3 = centerY+rd2.H/2;
+rd2.vy4 = centerY+rd2.H/2;
+}
+void Road3(int Width,int Height)
+{
+rd3.W = Width;
+rd3.H = Height;
+rd3.vx1 = centerX-rd3.W/2;
+rd3.vx2 = centerX+rd3.W/2;
+rd3.vx3 = centerX+rd3.W/2;
+rd3.vx4 = centerX-rd3.W/2;
+rd3.vy1 = centerY-rd3.H/2;
+rd3.vy2 = centerY-rd3.H/2;
+rd3.vy3 = centerY+rd3.H/2;
+rd3.vy4 = centerY+rd3.H/2;
+}
 
 void Display (void) 
 { 
 glClear(GL_COLOR_BUFFER_BIT);
 
-
-rd1.ChangeHorizontalPos(5,5,5,5,'+');
-rd1.CreateRoad();
-
+Road1(120,16);
+rd1.ChangeVerticalPos(32,32,32,32,'-');
+rd1.CreateRoad(0,0,0);
+Road2(120,16);
+rd2.ChangeVerticalPos(5,5,5,5,'-');
+rd2.CreateRoad(0,0,0);
+Road3(120,16);
+rd3.ChangeVerticalPos(22,22,22,22,'+');
+rd3.CreateRoad(0,0,0);
 
 glutSwapBuffers();
 glFlush();
 
 
 } 
-//g++ Collision.cpp -o Collision -lglut -lGLU -lGL
+//g++ GameMap.cpp -o NGameMap -lglut -lGLU -lGL
 
 
 int main (int argc, char** argv) 
