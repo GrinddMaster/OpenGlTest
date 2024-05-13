@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <iostream>
-#include <ctime> // Include for time functions
+#include <ctime> 
 
 using namespace std;
 
@@ -147,66 +147,66 @@ struct RoadStrips {
             vy4 -= y4;
         }
         else {
-            //Do nothing
+            // nothing
         }
     }
 };
 
 struct River {
-    int startX = 0; // Start X position of the river
-    int endX = 0;   // End X position of the river
-    int y = 0;      // Y position of the river
+    int startX = 0; 
+    int endX = 0;   
+    int y = 0;      
 
-    // Function to set the position and dimensions of the river
+    
     void SetRiver(int start, int end, int yPos) {
         startX = start;
         endX = end;
         y = yPos;
     }
 
-    // Function to draw the river
+    
     void DrawRiver() {
-        glColor3f(0.0, 0.0, 1.0); // Blue color for the river
+        glColor3f(0.0, 0.0, 1.0); 
         glBegin(GL_POLYGON);
         glVertex2f(startX, y);
         glVertex2f(endX, y);
-        glVertex2f(endX, y + 10); // Adjust the height of the river as needed
+        glVertex2f(endX, y + 10); 
         glVertex2f(startX, y + 10);
         glEnd();
     }
 };
 struct riverSides {
-    int startX = 0; // Start X position of the river
-    int endX = 0;   // End X position of the river
-    int y = 0;      // Y position of the river
+    int startX = 0; 
+    int endX = 0;   
+    int y = 0;      
 
-    // Function to set the position and dimensions of the river
+    
     void SetRiverSides(int start, int end, int yPos) {
         startX = start;
         endX = end;
         y = yPos;
     }
 
-    // Function to draw the river
+    
     void DrawRiverSides() {
-        glColor3f(0.5,0.4,0.5); //  color for the river
+        glColor3f(0.5,0.4,0.5); 
         glBegin(GL_POLYGON);
         glVertex2f(startX, y);
         glVertex2f(endX, y);
-        glVertex2f(endX, y + 2); // Adjust the height of the river as needed
+        glVertex2f(endX, y + 2); 
         glVertex2f(startX, y + 2);
         glEnd();
     }
 };
 
 struct Boat {
-    // Position and size of the boat
+    
     int posX;
     int posY;
     int width;
     int length;
 
-    // Function to set the position and dimensions of the boat
+    
     void SetBoat(int x, int y, int w, int l) {
         posX = x;
         posY = y;
@@ -214,17 +214,17 @@ struct Boat {
         length = l;
     }
 
-    // Function to draw the boat
+   
     void DrawBoat() {
-        glColor3f(0.6, 0.3, 0.0); // Brown color for the boat
+        glColor3f(0.6, 0.3, 0.0); 
         glBegin(GL_POLYGON);
-        // Body of the boat
+       
         glVertex2f(posX, posY);
         glVertex2f(posX + width, posY);
         glVertex2f(posX + width, posY + length);
         glVertex2f(posX, posY + length);
         glEnd();
-        glColor3f(0, 0, 0); // Brown color for the boat
+        glColor3f(0, 0, 0); 
       glBegin(GL_LINES);
     glVertex2f(46,61);
     glVertex2f(56,61);
@@ -300,9 +300,9 @@ void car(){
 void DrawCircle(float cx, float cy, float r, int num_segments) {
 glBegin(GL_POLYGON);
 for (int i = 0; i < num_segments; i++) {
-float theta = 2.0f * 3.1415926f * float(i) / float(num_segments);//get the current angle
-float x = r * cosf(theta);//calculate the x component
-float y = r * sinf(theta);//calculate the y component
+float theta = 2.0f * 3.1415926f * float(i) / float(num_segments);
+float x = r * cosf(theta);
+float y = r * sinf(theta);
 glVertex2f(x + cx, y + cy);//output vertex
 }
 glEnd();
@@ -353,12 +353,12 @@ void printSome(char* str, int x, int y) {
 }
 
 void init2D(void) {
-    glClearColor(0, 0.0, 0.0, 0.0); // making background color black as first 3 arguments all are 0.0
-    glColor3f(0.0, 0.0, 0.5); // making picture color green (in RGB mode), as middle argument is 1.0
-    glPointSize(2.0); // breadth of picture boundary is 1 pixel
+    glClearColor(0, 0.0, 0.0, 0.0); 
+    glColor3f(0.0, 0.0, 0.5); 
+    glPointSize(2.0); 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //gluOrtho2D(0.0, logWidth, 0.0, logHeight); // setting window dimension in X- and Y- direction
+    gluOrtho2D(0.0, logWidth, 0.0, logHeight); 
 
 
 
@@ -370,15 +370,15 @@ RoadStrips rs1, rs2, rs3;
 River river;
 riverSides riverSides;
 Boat boat;
-// Global variable to store starting time
+
 time_t startTime;
 
-// Function to initialize the timer
+
 void initTimer() {
-    startTime = time(NULL); // Get the current time and store it as the start time
+    startTime = time(NULL);
 }
 
-// Function to calculate and display elapsed time
+
 void displayTimer() {
     // Calculate elapsed time by subtracting current time from start time
     time_t currentTime = time(NULL);
@@ -388,12 +388,12 @@ void displayTimer() {
     int minutes = elapsedTime / 60;
     int seconds = elapsedTime % 60;
 
-    // Convert minutes and seconds to string format
+   
     char timerString[50];
     sprintf(timerString, "Time: %02d:%02d", minutes, seconds);
 
-    // Display the timer string on the screen
-    printSome(timerString, 10, 10); // Assuming (10, 10) is the desired position to display the timer
+    
+    printSome(timerString, 10, 10); 
 }
 
 void Road1(int Width, int Height) {
@@ -450,15 +450,15 @@ void Display(void) {
     rd3.CreateRoad(0, 0, 0);
 
     // Draw the river between the roads
-    river.SetRiver(0, 100, 59); // Adjust the Y position and dimensions of the river as needed
+    river.SetRiver(0, 100, 59); 
     river.DrawRiver();
 
-    riverSides.SetRiverSides(0, 100, 68); // Adjust the Y position and dimensions of the river as needed
+    riverSides.SetRiverSides(0, 100, 68); 
     riverSides.DrawRiverSides();
-    riverSides.SetRiverSides(0, 100, 57); // Adjust the Y position and dimensions of the river as needed
+    riverSides.SetRiverSides(0, 100, 57); 
     riverSides.DrawRiverSides();
 
- boat.SetBoat(46, 60, 10, 6); // Adjust the position and size of the boat as needed
+ boat.SetBoat(46, 60, 10, 6); 
     boat.DrawBoat();
 
     glPushMatrix();
