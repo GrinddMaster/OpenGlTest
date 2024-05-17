@@ -9,9 +9,9 @@ int phyWidth = 700;
 int phyHeight = 700;
 int logWidth = 100;
 int logHeight = 100;
+int alphaX,alphaY = 0;
 int centerX = logWidth / 2;
 int centerY = logHeight / 2;
-int alphaX,alphaY = 0;
 
 void DrawCircle(float cx, float cy, float r, int num_segments) {
 glBegin(GL_POLYGON);
@@ -34,31 +34,31 @@ glVertex2f((centerX)+10/2+alphaX,(centerY-45)+7.5/2+alphaY);//Top Right corner
 glVertex2f((centerX)-10/2+alphaX,(centerY-45)+7.5/2+alphaY);//Top left corner
 glEnd();
 glColor3f(0, 0.5, 0.5);
-DrawCircle((centerX), (centerY-45), 5, 100);
+DrawCircle((centerX+alphaX), (centerY-45+alphaY), 5, 100);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX), (centerY-45), 1.5, 6);
+DrawCircle((centerX+alphaX), (centerY-45+alphaY), 1.5, 6);
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX+3), (centerY-43), 1.5, 6);
+DrawCircle((centerX+3+alphaX), (centerY-43+alphaY), 1.5, 6);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX-3), (centerY-43.5), 1.5, 6);
+DrawCircle((centerX-3+alphaX), (centerY-43.5+alphaY), 1.5, 6);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX), (centerY-42), 1.5, 6);
+DrawCircle((centerX+alphaX), (centerY-42+alphaY), 1.5, 6);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX), (centerY-48), 1.5, 6);
+DrawCircle((centerX+alphaX), (centerY-48+alphaY), 1.5, 6);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX+2.9), (centerY-46.5), 1.5, 6);
+DrawCircle((centerX+2.9+alphaX), (centerY-46.5+alphaY), 1.5, 6);
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX-2.9), (centerY-46.5), 1.5, 6);
+DrawCircle((centerX-2.9+alphaX), (centerY-46.5+alphaY), 1.5, 6);
 
 
 glColor3f(0.5, 1, 0.5);
-DrawCircle((centerX), (centerY-40), 1.5, 100);
+DrawCircle((centerX+alphaX), (centerY-40+alphaY), 1.5, 100);
 }
 
 
