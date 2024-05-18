@@ -10,7 +10,7 @@
 #include<iostream>
 #include"Character.cpp"
 #include"BoatNRiverSide.cpp"
-
+#include"CarShape.cpp"
 
 using namespace std;
 #define pi 3.142857 
@@ -19,6 +19,7 @@ using namespace std;
 
 int flag,countscore,scoreflag,position= 0;
 int HoldTheStipsDown = 1;
+int HoldCarShapeDown = 1;
 double XposC1,XposC2,XposC3 = 0.0;
 struct Road {
 
@@ -214,7 +215,7 @@ struct CollideCar{
 
     void CarC()
 {
-    glColor3f(1, 1, 1);
+    glColor3f(0, 0, 0);
 glBegin(GL_POLYGON);
 glVertex2f(vx1,vy1);//Bottom left corner
 glVertex2f(vx2,vy2);//Bottom right corner
@@ -390,7 +391,17 @@ void KeyMoves(unsigned char key, int x, int y) {
     
     glutPostRedisplay();
 }
-
+ void HoldTheCars()
+ {
+    if(HoldCarShapeDown == 1){
+c1.ChangeHorizontalPos(40,40,40,40,'-',HoldCarShapeDown);
+c1.ChangeVerticalPos(32,32,32,32,'-',HoldCarShapeDown);
+c2.ChangeHorizontalPos(40,40,40,40,'-',HoldCarShapeDown);
+c2.ChangeVerticalPos(5,5,5,5,'-',HoldCarShapeDown);
+c3.ChangeHorizontalPos(40,40,40,40,'-',HoldCarShapeDown);
+c3.ChangeVerticalPos(33,33,33,33,'+',HoldCarShapeDown);HoldCarShapeDown = 0;
+}
+ }
 void Colliders()
 {
  string s = to_string(countscore);
@@ -405,7 +416,7 @@ printSome("Score: ",centerX-40,centerY+45);
 
 if(position == 0)// To make sure the solhefa stay in the same position
 {
-    Collider1.ChangeHorizontalPos(40,40,40,40,'-');
+    Collider1.ChangeHorizontalPos( 40,40,40,40,'-');
     Collider1.ChangeVerticalPos(32,32,32,32,'-');
     Collider2.ChangeHorizontalPos(40,40,40,40,'-');
     Collider2.ChangeVerticalPos(5,5,5,5,'-');
@@ -429,9 +440,12 @@ glPushMatrix();
 glTranslated(XposC3,0,0);
 Collider3.CarC();
 glPopMatrix();
-
 Collide();
-   
+HoldTheCars();
+
+ShowCarShapes(XposC1,XposC2,XposC3);
+
+
 }
 
 
